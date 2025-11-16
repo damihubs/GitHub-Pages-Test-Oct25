@@ -1,11 +1,354 @@
+Here’s a nicer-looking index.html you can create via Add file → Create new file:
+
+Filename: index.html
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>My GitHub Pages Site</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: #0f172a;
+        --bg-accent: #111827;
+        --card: #020617;
+        --text-main: #e5e7eb;
+        --text-muted: #9ca3af;
+        --accent: #38bdf8;
+        --accent-soft: rgba(56, 189, 248, 0.18);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background: radial-gradient(circle at top, #1f2933 0, #020617 55%);
+        color: var(--text-main);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1.5rem;
+      }
+
+      .shell {
+        max-width: 900px;
+        width: 100%;
+      }
+
+      .card {
+        background: linear-gradient(135deg, #020617, #020617) padding-box,
+          linear-gradient(135deg, rgba(56, 189, 248, 0.5), transparent)
+            border-box;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        border-radius: 1.5rem;
+        padding: 2.5rem clamp(2rem, 5vw, 3rem);
+        box-shadow:
+          0 20px 50px rgba(15, 23, 42, 0.9),
+          0 0 0 1px rgba(15, 23, 42, 0.9);
+        backdrop-filter: blur(18px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .glow {
+        position: absolute;
+        inset: -40%;
+        background: radial-gradient(
+          circle at top left,
+          rgba(56, 189, 248, 0.08),
+          transparent 55%
+        );
+        opacity: 0.8;
+        pointer-events: none;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.25rem 0.8rem;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.85);
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        color: var(--text-muted);
+        font-size: 0.78rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-bottom: 1.75rem;
+      }
+
+      .pill-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: #22c55e;
+        box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.3);
+      }
+
+      h1 {
+        font-size: clamp(2.1rem, 3vw, 2.6rem);
+        line-height: 1.1;
+        margin-bottom: 1rem;
+        letter-spacing: -0.04em;
+      }
+
+      .accent-gradient {
+        background: linear-gradient(120deg, #38bdf8, #a855f7, #f97316);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .subtitle {
+        max-width: 36rem;
+        color: var(--text-muted);
+        font-size: 0.98rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+        gap: 2.25rem;
+      }
+
+      @media (max-width: 768px) {
+        .card {
+          padding: 2rem 1.75rem;
+        }
+        .layout {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
+      .feature-list {
+        list-style: none;
+        display: grid;
+        gap: 0.9rem;
+        margin-bottom: 2.1rem;
+      }
+
+      .feature {
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+      }
+
+      .feature-icon {
+        width: 22px;
+        height: 22px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.6);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        color: var(--accent);
+        background: rgba(15, 23, 42, 0.9);
+      }
+
+      .feature-text {
+        font-size: 0.9rem;
+        color: var(--text-main);
+      }
+
+      .feature-text span {
+        display: block;
+        color: var(--text-muted);
+        font-size: 0.86rem;
+        margin-top: 0.08rem;
+      }
+
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+      }
+
+      .meta-tag {
+        padding: 0.35rem 0.7rem;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.9);
+        border: 1px solid rgba(148, 163, 184, 0.4);
+      }
+
+      .panel {
+        background: radial-gradient(circle at top, #111827, #020617);
+        border-radius: 1.2rem;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        padding: 1.2rem 1.25rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .panel-label {
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: 0.7rem;
+      }
+
+      .panel-code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", monospace;
+        font-size: 0.78rem;
+        color: var(--text-main);
+        background: rgba(15, 23, 42, 0.85);
+        border-radius: 0.9rem;
+        padding: 0.9rem 1rem;
+        border: 1px solid rgba(148, 163, 184, 0.3);
+      }
+
+      .panel-line {
+        display: flex;
+        gap: 0.6rem;
+        margin-bottom: 0.35rem;
+      }
+
+      .panel-line:last-child {
+        margin-bottom: 0;
+      }
+
+      .panel-lineno {
+        width: 1.2rem;
+        text-align: right;
+        color: #4b5563;
+      }
+
+      .panel-code span {
+        color: var(--accent);
+      }
+
+      .badge-live {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        font-size: 0.7rem;
+        padding: 0.25rem 0.55rem;
+        border-radius: 999px;
+        border: 1px solid rgba(52, 211, 153, 0.8);
+        color: #a7f3d0;
+        background: rgba(6, 95, 70, 0.2);
+      }
+
+      .badge-live::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 999px;
+        background: #22c55e;
+        display: inline-block;
+        margin-right: 0.3rem;
+        box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.3);
+        vertical-align: middle;
+      }
+
+      footer {
+        margin-top: 1.75rem;
+        text-align: center;
+        font-size: 0.8rem;
+        color: #6b7280;
+      }
+
+      footer span {
+        color: var(--accent);
+      }
+    </style>
   </head>
   <body>
-    <h1>Hello from GitHub Pages!</h1>
-    <p>This site is deployed automatically using GitHub Actions.</p>
+    <main class="shell">
+      <section class="card">
+        <div class="glow"></div>
+
+        <div class="pill">
+          <span class="pill-dot"></span>
+          Deployed with GitHub Actions
+        </div>
+
+        <div class="layout">
+          <div>
+            <h1>
+              Beautiful, automatic deploys
+              <span class="accent-gradient">from your repository.</span>
+            </h1>
+
+            <p class="subtitle">
+              This site is served with <strong>GitHub Pages</strong> and
+              updated every time code is pushed to the <code>main</code>
+              branch. No manual uploads, no extra steps—just commit and go.
+            </p>
+
+            <ul class="feature-list">
+              <li class="feature">
+                <div class="feature-icon">⚙️</div>
+                <div class="feature-text">
+                  Automated workflow
+                  <span>Builds and deploys your site using GitHub Actions.</span>
+                </div>
+              </li>
+              <li class="feature">
+                <div class="feature-icon">🌐</div>
+                <div class="feature-text">
+                  Hosted on GitHub Pages
+                  <span>Served over HTTPS with your project’s public URL.</span>
+                </div>
+              </li>
+              <li class="feature">
+                <div class="feature-icon">🚀</div>
+                <div class="feature-text">
+                  Push to publish
+                  <span>Every push to <code>main</code> updates this page
+                    automatically.</span>
+                </div>
+              </li>
+            </ul>
+
+            <div class="meta">
+              <div class="meta-tag">GitHub Actions</div>
+              <div class="meta-tag">GitHub Pages</div>
+              <div class="meta-tag">Static Site</div>
+            </div>
+          </div>
+
+          <aside class="panel">
+            <div class="badge-live">Live</div>
+            <div class="panel-label">Workflow snapshot</div>
+            <div class="panel-code" aria-label="Example workflow">
+              <div class="panel-line">
+                <div class="panel-lineno">1</div>
+                <div>name: <span>Deploy to GitHub Pages</span></div>
+              </div>
+              <div class="panel-line">
+                <div class="panel-lineno">2</div>
+                <div>on: push to <span>main</span></div>
+              </div>
+              <div class="panel-line">
+                <div class="panel-lineno">3</div>
+                <div>uses: <span>actions/deploy-pages@v4</span></div>
+              </div>
+              <div class="panel-line">
+                <div class="panel-lineno">4</div>
+                <div>result: <span>site updated ✔</span></div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <footer>
+        Deployed from <span>GitHub</span> with love and automation.
+      </footer>
+    </main>
   </body>
 </html>
